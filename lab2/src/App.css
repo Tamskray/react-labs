@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+.btn1{
+  position: relative;
+  left: 40px;
+}
+
+.btn2{
+  position: relative;
+  left: 50px;
+}
+
+.btn3{
+  position: relative;
+  left: 70px;
+}
