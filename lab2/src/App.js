@@ -22,8 +22,8 @@ const cartList = [
 function App() {
   return (
     <div className="App">
-      {/* <CounterList countersList={counters} />
-      <Cart cartList={cartList} /> */}
+      <CounterList countersList={counters} />
+      <Cart cartList={cartList} />
       <Game />
     </div>
   );
