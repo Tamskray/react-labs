@@ -1,18 +1,27 @@
 .App {
   text-align: center;
+  padding: 20px;
 }
 
-.btn1{
+.btn1 {
   position: relative;
   left: 40px;
 }
 
-.btn2{
+.btn2 {
   position: relative;
   left: 50px;
 }
 
-.btn3{
+.btn3 {
   position: relative;
   left: 70px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.user-input {
+  margin: 10px;
 }
