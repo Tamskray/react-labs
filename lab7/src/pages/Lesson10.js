@@ -1,15 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchUsers } from "../store/actions/users";
 import {
   increaseAction,
   decreaseAction,
 } from "../store/reducers/counterReducer";
 import { addUserAction, removeUserAction } from "../store/reducers/userReducer";
 
-import { increment, decrement, addUser } from "../toolkitRedux/createSlice";
+// for redux toolkit
+import { useEffect, useState } from "react";
+import {
+  increment,
+  decrement,
+  addUser,
+  removeUser,
+} from "../toolkitRedux/createSlice";
+import { fetchUsers } from "../store/actions/users";
 
 const Lesson10 = () => {
-  //vanilla redux
+  //   vanilla redux
   //   const dispatch = useDispatch();
   //   const counter = useSelector((state) => state.counter.counter);
   //   const users = useSelector((state) => state.users.users);
@@ -37,7 +44,18 @@ const Lesson10 = () => {
   // redux toolkit
   const counter = useSelector((state) => state.toolkit.counter);
   const users = useSelector((state) => state.toolkit.users);
+  const [addUsers, setAddUsers] = useState(false);
   const dispatch = useDispatch();
+
+  const isAddUsersHandler = () => {
+    setAddUsers(true);
+    console.log(addUsers);
+  };
+
+  useEffect(() => {
+    addUsers && dispatch(fetchUsers());
+    setAddUsers(false);
+  }, [addUsers]);
 
   return (
     <div>
@@ -45,8 +63,7 @@ const Lesson10 = () => {
         {/* Lesson: {topic} */}
         <br />
         Counter: {counter}
-        {/* 
-        vanilla redux
+        {/* vanilla redux
         <button onClick={increase}>Increase counter</button>
         <button onClick={decrease}>Decrease counter</button> */}
         <button onClick={() => dispatch(increment())}>Increase counter</button>
@@ -54,7 +71,8 @@ const Lesson10 = () => {
       </div>
 
       <div>
-        {/* <button onClick={addUser}>Add user</button> */}
+        {/* vanilla redux
+        <button onClick={addUser}>Add user</button> */}
         <button
           onClick={() =>
             dispatch(addUser({ name: `Petya ${Date.now()}`, id: Date.now() }))
@@ -62,12 +80,12 @@ const Lesson10 = () => {
         >
           Add user
         </button>
-        {/* <button onClick={() => dispatch(fetchUsers())}>
+
+        {/* vanilla redux
+        <button onClick={() => dispatch(fetchUsers())}>
           Add users from fakeAPI
         </button> */}
-        {/* <button onClick={() => dispatch(addUsers({ name: fetchUsers() }))}>
-          Add users from fakeAPI
-        </button> */}
+        <button onClick={isAddUsersHandler}>Add users from fakeAPI</button>
 
         {users.length ? (
           <div>
@@ -75,7 +93,7 @@ const Lesson10 = () => {
             {users.map((user) => (
               <div
                 key={user.id + Math.random()}
-                // onClick={() => removeUser(user.id)}
+                onClick={() => dispatch(removeUser(user.id))}
               >
                 {user.name}
               </div>
